@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Saludo Interactivo</title>
+</head>
+<body>
+
+    <h2>Saludo Interactivo</h2>
+
+    <input id="nombre" placeholder="Ingresa tu nombre">
+    <button id="saludar">Saludar</button>
+
+    <div id="mensajes"></div>
+
+    <script>
+        const btnSaludar = document.getElementById("saludar");
+        const inputNombre = document.getElementById("nombre");
+        const mensajes = document.getElementById("mensajes");
+
+        btnSaludar.addEventListener("click", function () {
+
+            const nombre = inputNombre.value.trim();
+
+            // Validación
+            if (nombre === "") {
+                alert("Por favor, ingresa un nombre.");
+                return;
+            }
+
+            const mensajeTexto = `¡Hola ${nombre}! Bienvenido/a.`;
+
+            // Mostrar mensaje en el DOM
+            const mensaje = document.createElement("p");
+            mensaje.textContent = mensajeTexto;
+            mensajes.appendChild(mensaje);
+            
+            window.alert(mensajeTexto);
+
+            // Ventana hija
+            const ventanaHija = window.open("","_blank","width=400,height=300");
+
+            ventanaHija.document.write(`
+                <html>
+                <head>
+                    <title>Bienvenida</title>
+                </head>
+                <body>
+                    <h2>${mensajeTexto}</h2>
+
+                    <button onclick="
+                        window.opener.postMessage(
+                            'Mensaje recibido desde la ventana hija',
+                            '*'
+                        );
+                    ">
+                        Enviar mensaje
+                    </button>
+                </body>
+                </html>
+            `);
+
+            // Eliminar mensaje después de 5 segundos
+            setTimeout(() => {
+                mensaje.remove();
+            }, 5000);
+
+            inputNombre.value = "";
+        });
+
+        // Recibir mensajes desde la ventana hija
+        window.addEventListener("message", function (event) {
+
+            const respuesta = document.createElement("p");
+
+            respuesta.textContent =
+                "Respuesta de la ventana hija: " + event.data;
+
+            mensajes.appendChild(respuesta); // Mostrar respuesta en el DOM
+        });
+    </script>
+
+</body>
+</html>
