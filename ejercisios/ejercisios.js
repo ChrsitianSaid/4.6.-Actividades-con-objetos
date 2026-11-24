@@ -73,10 +73,60 @@ console.log(usuario2);
 const clonUsuario = Object.assign({}, usuario1);
 
 //modifiacmos el clone
-cloneUsuario.nombre="Pedro";
+clonUsuario.nombre="Pedro";
 
 console.log(`Usaurio1 despues de modificar clon`);
 console.log(usuario1);
 
 console.log("clon");
 console.log(clonUsuario);
+
+console.log("==========================================================================//================================================")
+console.log("4. Métodos en objetos y uso de (this)");
+
+function Coche(nombre, modelo, anio) {
+    this.nombre = nombre;
+    this.modelo = modelo;
+    this.anio = anio;
+};
+
+//crear objeto con new
+const coche1 = new Coche("Toyota","Corolla", 2022);
+const coche2 = new Coche("Ford","Focus", 2022);
+
+console.log(coche1);
+console.log(coche2);
+
+console.log("==========================================================================//================================================")
+console.log("5. Symbol y claves ocultas");
+
+//Creacion del simbolo
+const id = Symbol("id");
+
+//Crear el objeto empleado
+const empleado = {
+    nombre:"Maria",
+    puesto: "programadora",
+    [id]: 404
+};
+
+for (let propiedad in empleado) {
+    console.log(`${propiedad} : ${empleado[propiedad]}`);
+};
+
+//Acceder a la propiedad Symbol
+console.log(`ID: ${empleado[id]}`)
+
+console.log("==========================================================================//================================================")
+console.log("6. Conversión de objetos a valores primitivos");
+
+const cuentaBancaria = {
+    saldo: 1000,
+
+    toString(){
+        return `saldo: ${this.saldo} EUR`
+    }
+}
+
+console.log(cuentaBancaria.toString());
+
