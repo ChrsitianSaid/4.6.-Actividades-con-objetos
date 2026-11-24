@@ -130,3 +130,82 @@ const cuentaBancaria = {
 
 console.log(cuentaBancaria.toString());
 
+console.log("==========================================================================//================================================")
+console.log("7. Herencia de Clases");
+
+//Clase base
+class vehicle {
+    constructor(name) {
+        this.name = name
+    };
+
+    move () {
+        console.log(`${this.name} se esta moviendo`);
+    }
+};
+
+//Clase hija
+class car extends vehicle {
+    constructor(name, model) {
+        super(name); // Llama al constructor de Vehiculos
+        this.model = model;
+    }
+
+    //sobrescribe el método move()
+
+    move() {
+        console.log(`${this.name} esta moviendose`)
+    }
+
+    info() {
+        console.log(`name: ${this.name}, Model: ${this.model}`)
+    }
+}
+
+//Crear el objeto
+const myCar = new car ("toyota", "BZ4X");
+
+//llamar a los metodos
+myCar.move();
+myCar.info();
+
+console.log("==========================================================================//================================================")
+console.log("8.Encapsulación con Propiedades Privadas");
+
+class CajaFuerte {
+    //Código privado
+    #codigo;
+
+    constructor(propietario, codigoInicial) {
+        this.propietario = propietario;
+        this.#codigo = codigoInicial;
+    };
+
+    //Metodo para ver el código
+    verCodigo() {
+        return this.#codigo;
+    }
+
+    // Método para cambiar el código
+    cambiarCodigo (nuevoCodigo) {
+        if (nuevoCodigo.toString().length === 4) {
+            this.#codigo = nuevoCodigo;
+
+            console.log("Codigo cambiado correctamente. ");
+        } else {
+            console.log("Error: el código debe tener 4 digitos");
+        }
+    }
+}
+
+//crear objetp
+const miCaja = new CajaFuerte("Ana", 1234);
+
+// ver código inicial
+console.log(miCaja.verCodigo());
+
+// Cambiar código
+miCaja.cambiarCodigo(5678);
+
+//Verifiacar cambio
+console.log(miCaja.verCodigo());
