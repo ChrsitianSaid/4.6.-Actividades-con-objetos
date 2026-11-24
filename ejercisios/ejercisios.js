@@ -6,6 +6,7 @@ const persona = {
 }
 
 console.log(persona.nombre);
+console.log(persona.edad);
 persona.edad = 29;
 
 for (let propiedad in persona) {
@@ -84,18 +85,18 @@ console.log(clonUsuario);
 console.log("==========================================================================//================================================")
 console.log("4. Métodos en objetos y uso de (this)");
 
-function Coche(nombre, modelo, anio) {
-    this.nombre = nombre;
-    this.modelo = modelo;
-    this.anio = anio;
+function car(name, model, year) {
+    this.nombre = name;
+    this.model = model;
+    this.year = year;
 };
 
 //crear objeto con new
-const coche1 = new Coche("Toyota","Corolla", 2022);
-const coche2 = new Coche("Ford","Focus", 2022);
+const car1 = new car("Toyota","Corolla", 2022);
+const car2 = new car("Ford","Focus", 2022);
 
-console.log(coche1);
-console.log(coche2);
+console.log(car1);
+console.log(car2);
 
 console.log("==========================================================================//================================================")
 console.log("5. Symbol y claves ocultas");
@@ -145,7 +146,7 @@ class vehicle {
 };
 
 //Clase hija
-class car extends vehicle {
+class Car extends vehicle {
     constructor(name, model) {
         super(name); // Llama al constructor de Vehiculos
         this.model = model;
@@ -154,7 +155,7 @@ class car extends vehicle {
     //sobrescribe el método move()
 
     move() {
-        console.log(`${this.name} esta moviendose`)
+        console.log(`${this.name} is Rolling out!`)
     }
 
     info() {
@@ -197,6 +198,14 @@ class CajaFuerte {
         }
     }
 }
+
+// Esto provocaría error de sintaxis:
+//
+// console.log(miCaja.#codigo);
+//
+// Las propiedades privadas no pueden
+// accederse desde fuera de la clase.
+console.log(miCaja.codigo) //undefined
 
 //crear objetp
 const miCaja = new CajaFuerte("Ana", 1234);
